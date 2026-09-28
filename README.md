@@ -225,36 +225,16 @@ py -m pytest -v --cov=src tests/
 ```
 *Ejecuta los 23 tests de integración con un 93% de cobertura de código.*
 
----
+## 🛠️ 7. Especificaciones Técnicas y Capacidades del Sistema
 
-## 💼 7. Ficha Técnica Oficial para Currículum Vitae
-
-* **Proyecto:** AURA-Pricing Engine — Motor Autónomo de Pricing y Revenue Management Multicanal.
-* **Rol:** Lead Architect & Pricing Analytics Engineer.
-* **Stack Tecnológico:** Python 3.12, Statsmodels, Pandas, SQLite (WAL Mode), Apache Parquet, OpenPyXL, Streamlit, Plotly, Pytest (93% Coverage).
-* **Logros Cuantificables:**
-  * Diseñó y desarrolló un motor analítico de Revenue Management para catálogo de +350 SKUs multicanal (Shopify D2C, Mercado Libre, B2B) y multipaís (Chile, México, Argentina), optimizando la arquitectura de precios y márgenes de contribución.
-  * Implementó modelos econométricos multivariados en log-log para la estimación de elasticidad precio-demanda ($\epsilon$) y elasticidad cruzada, identificando productos inelásticos para capturar hasta un **4.2% de expansión de margen bruto**.
-  * Desarrolló un simulador de campañas promocionales (*CyberDay, Black Friday*) basado en fórmulas de *Break-Even Volume Lift*, erradicando descuentos deficitarios que destruían EBITDA.
-  * Construyó un algoritmo de liquidación dinámica (*Markdown Schedule*) para acelerar la rotación de *dead stock* ($DIO > 180$ días), reduciendo costos de bodegaje y liberando capital de trabajo.
-  * Automatizó la generación de modelos financieros en Excel mediante Python con fórmulas encadenadas (`VLOOKUP`, `IF`, validaciones y tablas dinámicas), sincronizado con un Dashboard interactivo en Streamlit para toma de decisiones comerciales ejecutivas.
-
----
-
-## 🎙️ 8. Speech Táctico para la Entrevista Comercial / Pricing
-
-> **Reclutador / Gerente de Pricing:** *"Cuéntanos cómo abordas las decisiones de precio y la relación entre volumen, margen y competencia en un catálogo con cientos de productos..."*
-
-> **Tu Respuesta:**
-> *"Mi enfoque de pricing se basa en la evidencia matemática y la protección rigurosa del P&L, alejándome por completo del tradicional cost-plus ciego. En el sector de retail de equipamiento fitness, donde el peso de los productos castiga fuertemente el margen por los fletes de última milla y las comisiones de marketplaces como Mercado Libre o Shopify, una decisión de precio no puede ser intuitiva.*
-> 
-> *Específicamente, construí un sistema integral de Pricing & Revenue Management (`AURA-Pricing Engine`) que opera en cuatro frentes:*
-> 1. *Primero, estimamos empíricamente la **elasticidad precio-demanda ($\epsilon$)** mediante modelos econométricos log-log. Esto nos permite separar el catálogo en productos inelásticos —donde podemos subir precio para capturar margen sin perder volumen— de productos elásticos sensibles a campañas.*
-> 2. *Segundo, estructuramos un **Price Index continuo** frente a competidores directos para saber exactamente dónde estamos parados en paridad, premium o desalineados.*
-> 3. *Tercero, en temporadas promocionales como el **CyberDay**, aplicamos el cálculo estricto de **Break-Even Volume Lift**: si el área comercial propone un 15% de descuento en una barra olímpica con un 35% de margen, el modelo calcula que necesitamos un 75% de volumen incremental solo para empatar la utilidad. Si la elasticidad proyecta solo un 30%, vetamos el descuento o reestructuramos la oferta.*
-> 4. *Y finalmente, para el stock de baja rotación en bodega, implementamos un algoritmo de **Markdown Scheduling** que programa rebajas escalonadas maximizando la recuperación de caja.*
-> 
-> *Todo esto lo conecto en un pipeline de datos en Python y SQL, pero traduciéndolo al lenguaje del negocio: modelos automatizados en Excel con fórmulas encadenadas complejas y dashboards ejecutivos en tiempo real para que los líderes comerciales tomen decisiones informadas en segundos."*
+* **Arquitectura:** Clean Architecture + Domain-Driven Design (DDD) con Inversión de Dependencias (DIP).
+* **Stack Tecnológico:** Python 3.12, Statsmodels, Pandas, SQLite (Modo WAL), Apache Parquet, OpenPyXL, Streamlit, Plotly, Pytest (93% Cobertura).
+* **Capacidades Analíticas:**
+  * Motor de Revenue Management multicanal (Shopify D2C, Mercado Libre, B2B) y multipaís (Chile, México, Argentina) para catálogo de +350 SKUs.
+  * Modelado econométrico multivariado en log-log con errores estándar robustos HC1 para estimación de elasticidad precio-demanda ($\epsilon$) y elasticidad cruzada.
+  * Simulador de promociones de alta estacionalidad con cálculo automático de Break-Even Volume Lift ($Lift_{BE} = \frac{d}{M_0 - d}$).
+  * Algoritmo de liquidación dinámica (*Markdown Schedule*) con escalera de rebajas y seguimiento de Días de Inventario ($DIO > 180$).
+  * Generador automatizado de modelos financieros en Excel (.xlsx) con fórmulas encadenadas (`VLOOKUP`, `IF`, validaciones) sincronizado con Dashboard interactivo en Streamlit.
 
 ---
 
