@@ -152,7 +152,10 @@ df_products, df_competitors, df_monthly, df_margin_health, df_slow_movers, df_om
 # Sidebar Navigation & Filter Controls
 # -----------------------------------------------------------------------------
 with st.sidebar:
-    st.image("https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80", use_container_width=True)
+    try:
+        st.image("https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80", use_column_width=True)
+    except Exception:
+        st.image("https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80")
     st.markdown("## ⚙️ Parámetros Globales")
     
     selected_country = st.selectbox("🌐 Mercado / País", ["Todos (CL, MX, AR)", "Chile (CL)", "México (MX)", "Argentina (AR)"])
