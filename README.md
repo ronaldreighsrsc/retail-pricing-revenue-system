@@ -38,7 +38,24 @@ En la industria de retail de bienes durables y equipamiento de entrenamiento de 
 
 ---
 
-## 📐 2. Fundamentos Matemáticos y Econométricos
+## 📸 2. Demostración Visual: Dashboard Ejecutivo y Modelo Corporativo en Excel
+
+El sistema une dos mundos: analítica de datos moderna en tiempo real para el C-Level y modelos financieros tradicionales auditables en Excel con fórmulas vivas:
+
+### A. Dashboard Ejecutivo en Streamlit (Portal de Decisión Comercial)
+![AURA Dashboard Overview](docs/images/dashboard_overview.png)
+*Vista ejecutiva con KPIs consolidados en USD, margen bruto del portafolio, selector de mercado multipaís (Chile, México, Argentina) y distribución de categorías.*
+
+![AURA Analytics & Scatter](docs/images/dashboard_analytics.png)
+*Matriz de dispersión Margen Bruto vs. Elasticidad Precio para identificación de productos inelásticos (expansión de margen) vs elásticos (candidatos a promoción).*
+
+### B. Modelo Financiero en Excel con Fórmulas Encadenadas y Formato Condicional
+![AURA Excel Model](docs/images/excel_model_preview.jpg)
+*Libro de cálculo `AURA_Pricing_Engine_Executive_Model.xlsx` generado automáticamente vía Python (OpenPyXL). Nótese en la barra de fórmulas el cálculo de Lift de Equilibrio `=IF(E2>=J2, "Destruye Margen", F2/(J2-F2))`, la extracción dinámica de COGS con `=VLOOKUP(...)`, y los semáforos de dictamen financiero `APROBADA` / `RECHAZADA`.*
+
+---
+
+## 📐 3. Fundamentos Matemáticos y Econométricos
 
 ### A. Estimación de Elasticidad Precio-Demanda ($\epsilon$)
 Se implementa una formulación **Log-Log (Cobb-Douglas Multivariada)** con estimación OLS y errores estándar robustos a heterocedasticidad (HC1 de White):
@@ -72,9 +89,19 @@ $$PI_{i,t} = \left( \frac{P_{\text{propio}, i, t}}{P_{\text{benchmark}, i, t}} \
 * $98 \le PI < 105$: **Competitive Parity** $\rightarrow$ Paridad de mercado.
 * $PI < 95$: **Underpriced (Fuga de Margen)** $\rightarrow$ **SUBIR PRECIO** de inmediato.
 
+### E. Identificación Causal y Mitigación de Endogeneidad (Simultaneidad Precio-Demanda)
+En econometría empírica de retail, la estimación directa mediante OLS puede presentar **sesgo de simultaneidad / endogeneidad** ($\text{Cov}(\ln P, u) \ne 0$), ya que los precios y las cantidades se determinan conjuntamente por el equilibrio entre oferta y demanda (o por variables omitidas como shocks de demanda no observados).
+
+* **Diseño Actual de Control:** El modelo mitiga este sesgo incluyendo efectos fijos temporales (meses/estacionalidad), variables proxy de shocks promocionales (`Promo`) y el vector de precios de competidores directos ($\ln P_{\text{comp}}$), capturando gran parte de la variación exógena observada.
+* **Extensión Arquitectónica (Variables Instrumentales / 2SLS):** Para categorías con alta volatilidad de costos o shocks de oferta concurrentes, el módulo `BaseEstimator` está diseñado para incorporar **Mínimos Cuadrados en Dos Etapas (2SLS)** utilizando *Cost Shifters* exógenos como instrumentos:
+  1. *Flete Marítimo Internacional (Índice SCFI / BDI y costo CIF).*
+  2. *Variación de precios de insumos industriales base (acero para barras/racks y poliuretano para mancuernas).*
+  3. *Costos mayoristas FOB de fábrica.*
+  Dichos instrumentos cumplen rigurosamente con la condición de relevancia ($\text{Cov}(Z, \ln P) \ne 0$) y la restricción de exclusión ($\text{Cov}(Z, u) = 0$), garantizando estimadores consistentes e insesgados de la verdadera elasticidad estructural de la demanda.
+
 ---
 
-## 🏛️ 3. Arquitectura del Sistema (Clean Architecture + DDD)
+## 🏛️ 4. Arquitectura del Sistema (Clean Architecture + DDD)
 
 El proyecto está estructurado bajo **Domain-Driven Design (DDD)** y desacoplamiento mediante **Inversión de Dependencias (DIP)**:
 
@@ -132,7 +159,7 @@ retail-pricing-revenue-system/
 
 ---
 
-## 📊 4. Módulos Analíticos Principales
+## 📊 5. Módulos Analíticos Principales
 
 ### 1. Motor Econométrico de Elasticidad (`elasticity_engine.py`)
 * Ajusta curvas de demanda multivariadas con transformación logarítmica.
@@ -163,7 +190,7 @@ Construye automáticamente un libro interactivo `.xlsx` con **fórmulas encadena
 
 ---
 
-## 🖥️ 5. Dashboard Ejecutivo de Decisión Comercial (Streamlit)
+## 🖥️ 6. Dashboard Ejecutivo de Decisión Comercial (Streamlit)
 
 El portal web interactivo está estructurado en 5 pestañas ejecutivas:
 
@@ -188,7 +215,7 @@ El portal web interactivo está estructurado en 5 pestañas ejecutivas:
 
 ---
 
-## 🚀 6. Guía de Puesta en Marcha (Quickstart)
+## 🚀 7. Guía de Puesta en Marcha (Quickstart)
 
 ### Requisitos Previos
 * Python 3.11 o 3.12 instalado.
@@ -226,7 +253,7 @@ py -m pytest -v --cov=src tests/
 ```
 *Ejecuta los 23 tests de integración con un 93% de cobertura de código.*
 
-## 🛠️ 7. Especificaciones Técnicas y Capacidades del Sistema
+## 🛠️ 8. Especificaciones Técnicas y Capacidades del Sistema
 
 * **Arquitectura:** Clean Architecture + Domain-Driven Design (DDD) con Inversión de Dependencias (DIP).
 * **Stack Tecnológico:** Python 3.12, Statsmodels, Pandas, SQLite (Modo WAL), Apache Parquet, OpenPyXL, Streamlit, Plotly, Pytest (93% Cobertura).
@@ -239,6 +266,6 @@ py -m pytest -v --cov=src tests/
 
 ---
 
-## 📜 Licencia
+## 📜 9. Licencia
 Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.  
 **Desarrollado por Ronald Solares** (Ingeniero Civil Industrial — Data, Pricing & Revenue Systems).
