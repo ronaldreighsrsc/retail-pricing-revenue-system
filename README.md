@@ -9,6 +9,7 @@
 [![OpenPyXL](https://img.shields.io/badge/Excel%20Modeling-OpenPyXL%20Chained%20Formulas-green.svg)](https://openpyxl.readthedocs.io/)
 [![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit%201.35%2B-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Tests](https://img.shields.io/badge/Coverage-93%25%20Pytest-success.svg)](https://docs.pytest.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -238,4 +239,6 @@ py -m pytest -v --cov=src tests/
 
 ---
 
-*Licencia: MIT • Desarrollado con Clean Architecture y rigor microeconométrico.*
+## 📜 Licencia
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.  
+**Desarrollado por Ronald Solares** (Ingeniero Civil Industrial — Data, Pricing & Revenue Systems).
